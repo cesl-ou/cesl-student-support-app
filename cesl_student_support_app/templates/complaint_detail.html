@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Complaint Details</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'complaint_detail_style.css' %}">
+    <style>
+        body {
+            background: url("{% static 'images/executive_bg.png' %}") no-repeat center center fixed;
+            background-size: cover;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            background-color: #dad8d8;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 80%;
+            max-width: 800px;
+            text-align: center;
+        }
+        h2 {
+        color: #333;
+        margin-bottom: 20px;
+    }
+
+    .button {
+        background-color: #543843; /* Green background */
+        color: white; /* White text */
+        padding: 10px 20px; /* Padding for the button */
+        text-align: center;
+        text-decoration: none; /* Remove underline */
+        display: inline-block;
+        font-size: 16px;
+        border-radius: 5px;
+        border: none;
+        cursor: pointer;
+        margin-top: 10px;
+    }
+
+    .button:hover {
+        background-color: #2a1a1f; /* Darker green on hover */
+    }
+
+    .complaint-detail-table {
+        width: 100%;
+        margin: 0 auto;  /* Center the table */
+        border-collapse: collapse;
+        margin-bottom: 20px;
+    }
+
+    .complaint-detail-table th, .complaint-detail-table td {
+        border: 1px solid #ddd;
+        padding: 10px;
+        text-align: left;
+    }
+
+    .complaint-detail-table th {
+        background-color: #f2f2f2;
+        color: #333;
+    }
+
+    .complaint-detail-table tr:nth-child(even) {
+        background-color: #f9f9f9;  /* Striped effect */
+    }
+
+    .complaint-detail-table tr:nth-child(odd) {
+        background-color: #ffffff;
+    }
+
+    .complaint-detail-table tr:hover {
+        background-color: #e6f7ff;
+    }
+
+    .complaint-detail-table td {
+        border-radius: 5px;
+    }
+
+    .complaint-detail-table th, .complaint-detail-table td {
+        border-radius: 8px;  /* Rounded corners for table cells */
+    }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Complaint Details</h2>
+
+        <!-- Add form method POST to handle status update -->
+        <form method="POST">
+            {% csrf_token %}
+
+            <table class="complaint-detail-table">
+                <tr>
+                    <td><strong>Complaint ID:</strong></td>
+                    <td>{{ complaint.id }}</td>
+                </tr>
+                <tr>
+                    <td><strong>Complaint:</strong></td>
+                    <td>{{ complaint.complaint_text }}</td>
+                </tr>
+                <tr>
+                    <td><strong>Status:</strong></td>
+                    <td>
+                        <select name="status">
+                            <option value="Work in Progress" {% if complaint.status == 'Work in Progress' %}selected{% endif %}>Work in Progress</option>
+                            <option value="Done" {% if complaint.status == 'Done' %}selected{% endif %}>Done</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td><strong>Created Date:</strong></td>
+                    <td id="created-date">{{ complaint.created_date|date:"c" }}</td>  <!-- ISO 8601 format -->
+                </tr>
+                <tr>
+                    <td><strong>Last Updated:</strong></td>
+                    <td id="last-updated">{{ complaint.last_updated|date:"c" }}</td>  <!-- ISO 8601 format -->
+                </tr>
+            </table>
+            <button type="submit" class="button">Update Status</button>
+        </form>
+
+        <!-- Back to Complaint Log link styled as a button -->
+        <a href="{% url 'complaint_log' %}" class="button">Back to Complaint Log</a>
+    </div>
+
+    <!-- Optional: JavaScript for converting UTC to local time -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const createdDateElement = document.getElementById('created-date');
+            const lastUpdatedElement = document.getElementById('last-updated');
+
+            // Convert created date to local time
+            if (createdDateElement && createdDateElement.textContent.trim()) {
+                const utcCreatedDate = new Date(createdDateElement.textContent.trim());
+                if (!isNaN(utcCreatedDate.getTime())) {
+                    createdDateElement.textContent = utcCreatedDate.toLocaleString();
+                }
+            }
+
+            // Convert last updated date to local time
+            if (lastUpdatedElement && lastUpdatedElement.textContent.trim()) {
+                const utcLastUpdatedDate = new Date(lastUpdatedElement.textContent.trim());
+                if (!isNaN(utcLastUpdatedDate.getTime())) {
+                    lastUpdatedElement.textContent = utcLastUpdatedDate.toLocaleString();
+                }
+            }
+        });
+    </script>
+</body>
+</html>

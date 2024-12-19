@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Complaint Log</title>
+    {% load static %}
+    <style>
+        body {
+            background: url("{% static 'images/executive_bg.png' %}") no-repeat center center fixed;
+            background-size: cover;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            background-color: #dad8d8;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 80%;
+            max-width: 800px;
+            text-align: center; /* Center the container text */
+        }
+
+        h2 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .complaint-log-table {
+            width: 100%;
+            margin: 0 auto;  /* Center the table */
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        .complaint-log-table th, .complaint-log-table td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: left;
+        }
+
+        .complaint-log-table th {
+            background-color: #f2f2f2;
+            color: #333;
+        }
+
+        .complaint-log-table tr:nth-child(even) {
+            background-color: #f9f9f9;  /* Striped effect */
+        }
+
+        .complaint-log-table tr:nth-child(odd) {
+            background-color: #ffffff;
+        }
+
+        .complaint-log-table tr:hover {
+            background-color: #e6f7ff;
+        }
+
+        .complaint-log-table td {
+            border-radius: 5px;
+        }
+
+        .complaint-log-table th, .complaint-log-table td {
+            border-radius: 8px;  /* Rounded corners for table cells */
+        }
+        
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Complaint Log</h2>
+
+        <table class="complaint-log-table">
+            <!-- <thead> -->
+                <tr>
+                    <th>Complaint ID</th>
+                    <th>Complaint</th>
+                    <th>Created Date</th> <!-- Added Created Date -->
+                    <th>Last Updated</th>
+                    <th>Status</th>
+                </tr>
+            <!-- </thead> -->
+            <tbody>
+                {% for complaint in complaints %}
+                    <tr>
+                        <td>
+                            <a href="{% url 'complaint_detail' complaint.id %}">{{ complaint.id }}</a>
+                        </td>
+                        <td>{{ complaint.complaint_text }}</td>
+                        <td class="created-date">{{ complaint.created_date|date:"c" }}</td>  <!-- ISO 8601 for Created Date -->
+                        <td class="last-updated">{{ complaint.last_updated|date:"c" }}</td> <!-- ISO 8601 for Last Updated -->
+                        <td>{{ complaint.status }}</td>
+                    </tr>
+                {% empty %}
+                    <tr>
+                        <td colspan="5">No complaints found.</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <!-- JavaScript to convert UTC dates to local time -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Convert all created date elements to local time
+            const createdDateElements = document.querySelectorAll('.created-date');
+            createdDateElements.forEach(function (element) {
+                if (element.textContent.trim()) {
+                    const utcCreatedDate = new Date(element.textContent.trim());
+                    if (!isNaN(utcCreatedDate.getTime())) {
+                        element.textContent = utcCreatedDate.toLocaleString();  // Convert to local time
+                    }
+                }
+            });
+
+            // Convert all last updated date elements to local time
+            const lastUpdatedElements = document.querySelectorAll('.last-updated');
+            lastUpdatedElements.forEach(function (element) {
+                if (element.textContent.trim()) {
+                    const utcLastUpdatedDate = new Date(element.textContent.trim());
+                    if (!isNaN(utcLastUpdatedDate.getTime())) {
+                        element.textContent = utcLastUpdatedDate.toLocaleString();  // Convert to local time
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up</title>
+    {% load static %}
+    <style>
+        body {
+            background: url("{% static 'images/welcome_bg.png' %}") no-repeat center center fixed;
+            background-size: cover;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            max-width: 350px; /* Increased the container width */
+            padding: 25px; /* Slightly increased padding */
+            background-color: rgb(251, 254, 255);
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-left: 60%;
+        }
+        input, select {
+            width: 90%;
+            padding: 6px; /* Reduced padding for compact fields */
+            margin: 8px 0;
+            border-radius: 3px;
+            border: 1px solid #eaecec;
+            background-color: #e7e9e9;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            /* box-sizing: border-box; */
+        }
+        .button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 50%; /* Ensures button spans full width */
+        }
+        .button:hover {
+            background-color: #45a049;
+        }
+        .message {
+            color: green;
+            margin-top: 10px;
+        }
+        .error {
+            color: red;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Sign Up</h2>
+        <form method="POST">
+            {% csrf_token %}
+            
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required>
+
+            <label for="first_name">First Name:</label>
+            <input type="text" id="first_name" name="first_name" required>
+            
+            <label for="last_name">Last Name:</label>
+            <input type="text" id="last_name" name="last_name" required>
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
+
+            <label for="confirm_password">Confirm Password:</label>
+            <input type="password" id="confirm_password" name="confirm_password" required>
+
+            <label for="user_type">Account Type:</label>
+            <select id="user_type" name="user_type" required disabled> <!-- Disabled as it's always student -->
+                <option value="student" selected>Student</option>
+            </select>
+
+            <button type="submit" class="button">Create Account</button>
+
+            <!-- Display success/error messages -->
+            {% if messages %}
+                {% for message in messages %}
+                    <p class="{% if message.tags %}{{ message.tags }}{% endif %}">{{ message }}</p>
+                {% endfor %}
+            {% endif %}
+        </form>
+    </div>
+</body>
+</html>

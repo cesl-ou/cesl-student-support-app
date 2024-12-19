@@ -1,0 +1,65 @@
+body {
+    background: url("{% static 'images/welcome_bg.png' %}") no-repeat center center fixed; /* Same background as login page */
+    background-size: cover; /* Cover the entire page */
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.container {
+    background-color: rgba(0, 0, 0, 0.8); /* Black background with transparency */
+    color: white; /* White text color */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 80%;
+    max-width: 800px;
+    text-align: center; /* Center the container text */
+}
+
+h2 {
+    color: #fff; /* White text color for heading */
+    margin-bottom: 20px;
+}
+
+.complaint-log-table {
+    width: 100%;
+    margin: 0 auto;  /* Center the table */
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+.complaint-log-table th, .complaint-log-table td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: left;
+}
+
+.complaint-log-table th {
+    background-color: #f2f2f2;
+    color: #333;
+}
+
+.complaint-log-table tr:nth-child(even) {
+    background-color: #f9f9f9;  /* Striped effect */
+}
+
+.complaint-log-table tr:nth-child(odd) {
+    background-color: #ffffff;
+}
+
+.complaint-log-table tr:hover {
+    background-color: #e6f7ff;
+}
+
+.complaint-log-table td {
+    border-radius: 5px;
+}
+
+.complaint-log-table th, .complaint-log-table td {
+    border-radius: 8px;  /* Rounded corners for table cells */
+}

@@ -1,0 +1,73 @@
+body {
+    background-color: #e3f2fd; /* A pastel blue background */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+.container {
+    background-color: #ffffff; /* Off-white color for the container */
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 350px;
+    text-align: left; /* Align text to the left */
+}
+
+h2 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    margin-top: 15px;
+    font-size: 14px;
+    color: #555;
+}
+
+input, select {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-sizing: border-box;
+    display: block; /* Ensures each field is on a new line */
+    margin-bottom: 15px; /* Adds space between fields */
+}
+
+button {
+    background-color: #4caf50; /* A green color for the submit button */
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+    margin-top: 10px; /* Space above the button */
+}
+
+button:hover {
+    background-color: #388e3c;
+}
+
+.signup-container {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.signup-container a {
+    color: #03a9f4;
+    text-decoration: none;
+    font-weight: bold;
+    margin-left: 5px;
+}
+
+.signup-container a:hover {
+    color: #0288d1;
+}
