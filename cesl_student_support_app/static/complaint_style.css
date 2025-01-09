@@ -1,5 +1,5 @@
 body {
-    background-color: #e1f5fe; /* A light pastel blue background */
+    background-color: #e1f5fe; 
     display: flex;
     justify-content: center;
     align-items: center;
@@ -9,7 +9,7 @@ body {
 }
 
 .container {
-    background-color: #ffffff; /* Off-white color for the container */
+    background-color: #ffffff;
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -41,11 +41,11 @@ select, textarea {
 }
 
 textarea {
-    resize: vertical; /* Allows resizing only in vertical direction */
+    resize: vertical; 
 }
 
 button {
-    background-color: #4caf50; /* Green submit button */
+    background-color: #4caf50;
     color: #fff;
     border: none;
     padding: 10px;

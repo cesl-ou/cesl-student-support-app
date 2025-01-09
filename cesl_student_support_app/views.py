@@ -98,13 +98,13 @@ def signup_user(request):
             return redirect('signup')
 
         # Ensure the email is unique
-        if UserDetails.objects.filter(username=username).exists():
-            messages.error(request, "Username is already taken.")
-            return redirect('signup')
+        # if UserDetails.objects.filter(username=username).exists():
+        #     messages.error(request, "Username is already taken.")
+        #     return redirect('signup')
 
-        if UserDetails.objects.filter(email=email).exists():
-            messages.error(request, "Email is already taken.")
-            return redirect('signup')
+        # if UserDetails.objects.filter(email=email).exists():
+        #     messages.error(request, "Email is already taken.")
+        #     return redirect('signup')
 
         # Create new user
         try:

@@ -1,5 +1,5 @@
-body {
-    background-color: #e3f2fd; /* A pastel blue background */
+/* body {
+    background-color: #e3f2fd; 
     display: flex;
     justify-content: center;
     align-items: center;
@@ -9,12 +9,12 @@ body {
 }
 
 .container {
-    background-color: #ffffff; /* Off-white color for the container */
+    background-color: #ffffff; 
     padding: 30px;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     width: 350px;
-    text-align: left; /* Align text to the left */
+    text-align: left; 
 }
 
 h2 {
@@ -37,19 +37,19 @@ input, select {
     border: 1px solid #ddd;
     border-radius: 5px;
     box-sizing: border-box;
-    display: block; /* Ensures each field is on a new line */
-    margin-bottom: 15px; /* Adds space between fields */
+    display: block; 
+    margin-bottom: 15px; 
 }
 
 button {
-    background-color: #4caf50; /* A green color for the submit button */
+    background-color: #4caf50; 
     color: #fff;
     border: none;
     padding: 10px 20px;
     border-radius: 5px;
     cursor: pointer;
     width: 100%;
-    margin-top: 10px; /* Space above the button */
+    margin-top: 10px; 
 }
 
 button:hover {
@@ -70,4 +70,4 @@ button:hover {
 
 .signup-container a:hover {
     color: #0288d1;
-}
+} */

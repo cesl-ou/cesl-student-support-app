@@ -5,80 +5,110 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Welcome</title>
     {% load static %}
-    <link rel="stylesheet" href="{% static 'styles.css' %}">
+    <!-- Load js-confetti library -->
+    <script src="https://cdn.jsdelivr.net/npm/js-confetti@latest/dist/js-confetti.browser.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
     <style>
         body {
-            background: url("{% static 'images/welcome_bg.png' %}") no-repeat center center fixed; /* Use the image as the background */
-            background-size: cover; /* Cover the entire page */
+            background-color: darkred;
+            background-size: cover;
+            font-family: 'Open Sans', Arial, sans-serif;
+            margin: 0;
+            padding: 0;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
-            margin: 0;
-            font-family: Arial, sans-serif;
         }
 
         .container {
-            background-color: rgb(255, 255, 255); /* Black background with transparency */
-            color: rgb(1, 1, 1); /* White text color */
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgb(237, 238, 238);
-            width: 350px;
-            text-align: center; /* Center all text inside the container */
-            margin-left: 60%; /* Move the container to the right */
+            background-color: rgba(255, 255, 255, 1); /* Slightly transparent white */
+            padding: 15px;
+            width: 100%;
+            max-width: 400px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
         }
 
-        .message {
-            background-color: #d4edda;
-            color: #0f0f0f;
-            padding: 10px;
-            border-radius: 5px;
+        .logo {
             margin-bottom: 20px;
-            border: 1px solid #c3e6cb;
+        }
+
+        .logo img {
+            width: 120px; /* Adjust logo size */
         }
 
         h2 {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .subtitle {
+            font-size: 14px;
+            color: #555;
             margin-bottom: 20px;
-            color: #0b0b0b; /* White color for heading */
         }
 
         .form-group {
             margin-bottom: 15px;
-            text-align: left; /* Align labels to the left */
+            text-align: left;
         }
 
         .form-group label {
             display: block;
             font-size: 14px;
-            color: #0c0c0c; /* Light gray label text */
+            font-weight: 600;
+            color: #555;
+            margin-bottom: 5px;
         }
 
         .form-group select,
         .form-group input {
             width: 100%;
-            padding: 8px;
+            padding: 10px;
             border: 1px solid #ddd;
-            border-radius: 5px;
-            margin-top: 5px;
+            font-size: 14px;
+            color: #333;
+            background-color: #f9f9f9;
             box-sizing: border-box;
-            background-color: #e7e9e9; /* Dark background for inputs */
-            color: #0e0e0e; /* White text for inputs */
+        }
+
+        .message-container {
+            margin-bottom: 15px;
+        }
+
+        .message {
+            background-color: #d4edda; /* Light green background for success */
+            color: #155724; /* Dark green text */
+            padding: 10px;
+            border: 1px solid #c3e6cb;
+            font-size: 14px;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        .message.error {
+            background-color: #f8d7da; /* Light red background for errors */
+            color: #721c24; /* Dark red text */
+            border: 1px solid #f5c6cb;
         }
 
         .form-group button {
             width: 100%;
-            background-color: #4caf50; /* A green color for the submit button */
-            color: #fff;
+            background-color: #007bff;
+            color: white;
             border: none;
-            padding: 10px;
-            border-radius: 5px;
+            padding: 12px;
+            font-size: 16px;
+            font-weight: bold;
             cursor: pointer;
             margin-top: 10px;
         }
 
         .form-group button:hover {
-            background-color: #388e3c;
+            background-color: #0056b3;
         }
 
         .signup-container {
@@ -86,35 +116,46 @@
         }
 
         .signup-container a {
-            color: #03a9f4;
+            color: #007bff;
             text-decoration: none;
             font-weight: bold;
-            margin-left: 5px;
         }
 
         .signup-container a:hover {
-            color: #0288d1;
+            color: #0056b3;
+        }
+
+        .container img {
+            max-width: 100px; /* Set the maximum width for the logo image */
+            height: auto; /* Maintain aspect ratio */
+            margin-bottom: 0px;
+            margin-top: 5px; /* Space between the logo and the content below */
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <!-- Display the message at the top in green -->
         {% if messages %}
-            <div class="message">
+            <div class="message-container">
                 {% for message in messages %}
-                    <p>{{ message }}</p>
+                    <div class="message {% if message.tags %}{{ message.tags }}{% endif %}">
+                        {{ message }}
+                    </div>
                 {% endfor %}
             </div>
         {% endif %}
 
-        <h2>Welcome</h2>
+        <div class="logo">
+            <img src="{% static '/images/logo.png' %}" alt="OU">  
+        </div>
+        <h2>One account. One university.</h2>
+        <div class="subtitle">Sign in to CESL Student Support System</div>
         <form method="POST" action="{% url 'login' %}">
             {% csrf_token %}
             <div class="form-group">
                 <label for="user_type">User Type:</label>
                 <select id="user_type" name="user_type" required>
-                    <option value="" disabled selected hidden>-select-</option>
+                    <option value="" disabled selected hidden>- Select -</option>
                     <option value="student">Student</option>
                     <option value="executive">Executive</option>
                 </select>
@@ -131,7 +172,7 @@
             </div>
 
             <div class="form-group">
-                <button type="submit">Submit</button>
+                <button type="submit">Sign In</button>
             </div>
         </form>
 
@@ -139,5 +180,23 @@
             <p>New user? <a href="{% url 'signup' %}">Sign Up</a></p>
         </div>
     </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const jsConfetti = new JSConfetti();
+
+            const messages = document.querySelectorAll('.message');
+
+            // Trigger confetti for success messages
+            messages.forEach(function (message) {
+                if (!message.classList.contains('error')) {
+                    jsConfetti.addConfetti({
+                        emojis: ['🎉', '✨', '🎊'], // Optional: Emoji confetti
+                        confettiColors: ['#ff0', '#f0f', '#0ff'], // Optional: Custom colors
+                    });
+                }
+            });
+        });
+    </script>
 </body>
 </html>

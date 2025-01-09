@@ -7,7 +7,7 @@
     {% load static %}
     <style>
         body {
-            background: url("{% static 'images/executive_bg.png' %}") no-repeat center center fixed;
+            background: darkred;
             background-size: cover;
             font-family: Arial, sans-serif;
             margin: 0;
@@ -21,16 +21,23 @@
         .container {
             background-color: #dad8d8;
             padding: 20px;
-            border-radius: 10px;
+            border-radius: 0px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             width: 80%;
-            max-width: 800px;
             text-align: center; /* Center the container text */
         }
 
         h2 {
             color: #333;
             margin-bottom: 20px;
+        }
+
+        .table-container {
+            max-height: 500px; /* Set the max height for the scrollable table */
+            overflow-y: auto; /* Add vertical scrolling */
+            margin-bottom: 20px; /* Add spacing below the table */
+            border: 1px solid #ddd;
+ /* Optional border for the scrollable area */
         }
 
         .complaint-log-table {
@@ -68,7 +75,7 @@
         }
 
         .complaint-log-table th, .complaint-log-table td {
-            border-radius: 8px;  /* Rounded corners for table cells */
+            border-radius: 5px;  /* Rounded corners for table cells */
         }
         
     </style>
@@ -77,6 +84,7 @@
     <div class="container">
         <h2>Complaint Log</h2>
 
+        <div class="table-container">
         <table class="complaint-log-table">
             <!-- <thead> -->
                 <tr>
@@ -105,6 +113,8 @@
                 {% endfor %}
             </tbody>
         </table>
+    </div>
+
     </div>
 
     <!-- JavaScript to convert UTC dates to local time -->

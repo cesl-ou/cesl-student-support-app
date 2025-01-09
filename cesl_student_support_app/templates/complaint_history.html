@@ -5,10 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Complaint History</title>
     {% load static %}
-    <link rel="stylesheet" href="{% static 'style.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@700&display=swap" rel="stylesheet">
     <style>
         body {
-            background: url("{% static 'images/executive_bg.png' %}") no-repeat center center fixed;
+            background: darkred;
             background-size: cover;
             font-family: Arial, sans-serif;
             margin: 0;
@@ -21,106 +21,120 @@
         .container {
             background-color: #dad8d8;
             padding: 20px;
-            border-radius: 10px;
+            border-radius: 0px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             width: 80%;
-            max-width: 800px;
+            height: 600px;
+            max-width: 1000px;
             text-align: center;
         }
         h2 {
-        color: #333;
-        margin-bottom: 20px;
-    }
+            color: green;
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
 
-    .button {
-        background-color: #543843; /* Green background */
-        color: white; /* White text */
-        padding: 10px 20px; /* Padding for the button */
-        text-align: center;
-        text-decoration: none; /* Remove underline */
-        display: inline-block;
-        font-size: 16px;
-        border-radius: 5px;
-        border: none;
-        cursor: pointer;
-        margin-top: 10px;
-    }
+        .button {
+            background-color: darkred;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            border: none;
+            cursor: pointer;
+            margin-top: 10px;
+        }
 
-    .button:hover {
-        background-color: #2a1a1f; /* Darker green on hover */
-    }
+        .button:hover {
+            background-color: darkred;
+        }
 
-    .complaint-table {
-        width: 100%;
-        margin: 0 auto;  /* Center the table */
-        border-collapse: collapse;
-        margin-bottom: 20px;
-    }
+        .table-container {
+            max-height: 405px; /* Set a maximum height for the table container */
+            overflow-y: auto; /* Enable vertical scrolling */
+            margin-bottom: 20px;
+            border: 1px solid #ddd; /* Optional: Add a border around the scrollable area */
+        }
 
-    .complaint-table th, .complaint-table td {
-        border: 1px solid #ddd;
-        padding: 10px;
-        text-align: left;
-    }
+        .complaint-table {
+            width: 100%;
+            margin: 0 auto;
+            border-collapse: collapse;
+        }
 
-    .complaint-table th {
-        background-color: #f2f2f2;
-        color: #333;
-    }
+        .complaint-table th, .complaint-table td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: left;
+        }
 
-    .complaint-table tr:nth-child(even) {
-        background-color: #f9f9f9;  /* Striped effect */
-    }
+        .complaint-table th {
+            background-color: #f2f2f2;
+            color: #333;
+        }
 
-    .complaint-table tr:nth-child(odd) {
-        background-color: #ffffff;
-    }
+        .complaint-table tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
 
-    .complaint-table tr:hover {
-        background-color: #e6f7ff;
-    }
+        .complaint-table tr:nth-child(odd) {
+            background-color: #ffffff;
+        }
 
-    .complaint-table td {
-        border-radius: 10px;
-    }
+        .complaint-table tr:hover {
+            background-color: #e6f7ff;
+        }
 
-    .complaint-table th, .complaint-table td {
-        border-radius: 8px;  /* Rounded corners for table cells */
-    }
+        .complaint-table td {
+            border-radius: 5px;
+        }
+
+        .complaint-table th, .complaint-table td {
+            border-radius: 5px;
+        }
     </style>
 </head>
 <body>
     <div class="container">
         {% if messages %}
-            <h1 class="success-message">
+            <h2 class="success-message">
                 {% for message in messages %}
                     {{ message }}
                 {% endfor %}
-            </h1>
+            </h2>
         {% endif %}
 
-        <h2 class="title">Complaint History</h2>
+        <h1 class="title">Complaint History</h1>
 
-        <table class="complaint-table">
-            <thead>
-                <tr>
-                    <th>Executive</th>
-                    <th>Complaint</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for complaint in complaints %}
+        <div class="table-container">
+            <table class="complaint-table">
+                <thead>
                     <tr>
-                        <td>{{ complaint.executive_name }}</td>
-                        <td>{{ complaint.complaint_text }}</td>
+                        <th>Serial Number</th>
+                        <th>Executive</th>
+                        <th>Complaint</th>
+                        <th>Status</th>
                     </tr>
-                {% empty %}
-                    <tr>
-                        <td colspan="2">No complaints submitted yet.</td>
-                    </tr>
-                {% endfor %}
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                    {% for complaint in complaints %}
+                        <tr>
+                            <td>{{ forloop.counter }}</td> <!-- Serial number -->
+                            <td>{{ complaint.executive_name }}</td>
+                            <td>{{ complaint.complaint_text }}</td>
+                            <td>{{ complaint.status }}</td> <!-- Status -->
+                        </tr>
+                    {% empty %}
+                        <tr>
+                            <td colspan="4">No complaints submitted yet.</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
 
         <a href="{% url 'complaint' %}" class="button">Submit another complaint</a>
     </div>
