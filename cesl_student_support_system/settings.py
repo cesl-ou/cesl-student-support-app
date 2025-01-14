@@ -123,7 +123,7 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 STATICFILES_DIRS = [
-    BASE_DIR / "static",  # Adjust based on your folder structure
+    os.path.join(BASE_DIR, 'static'),  # Adjust based on your folder structure
 ]
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'cesl_student_support_app/static')]
 
