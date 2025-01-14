@@ -69,6 +69,10 @@ TEMPLATES = [
     },
 ]
 
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+STATIC_URL = '/static/'
+
 WSGI_APPLICATION = 'cesl_student_support_system.wsgi.application'
 
 
